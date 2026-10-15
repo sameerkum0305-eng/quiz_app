@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class StartScreen extends StatelessWidget {
+  StartScreen(void Function() switchScreen);
+
   @override
   Widget build(BuildContext context) {
     return Center(
