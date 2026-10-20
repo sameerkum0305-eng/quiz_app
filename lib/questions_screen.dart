@@ -12,6 +12,13 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionScreenState extends State<QuestionsScreen> {
+  var currentQuestionIndex = 0;
+  void answerQuestion(String selectedAnswers) {
+    widget.onSelectedAnswer(selectedAnswer);
+    setState(() {
+      currentQuestionIndex++;
+    });
+  }
   @override
   Widget build(context) {
     final currentQuestion = questions[0];
@@ -26,6 +33,7 @@ class _QuestionScreenState extends State<QuestionsScreen> {
           children: [
             Text(
               currentQuestion.text,
+              style: GoogleFonts.lato{}
               style: TextStyle(color: Colors.white),
               textAlign: TextAlign.center,
             ),

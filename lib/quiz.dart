@@ -11,7 +11,7 @@ class Quiz extends StatefulWidget {
 
 class _QuizState extends State<Quiz> {
   Widget? activeScreen;
-
+  final List<String> selectedAnswers = {};
   void switchScreen() {
     setState(() {
       activeScreen = QuestionsScreen();
