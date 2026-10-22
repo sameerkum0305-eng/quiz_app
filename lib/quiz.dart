@@ -1,4 +1,4 @@
-==import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'start_screen.dart';
 import 'questions_screen.dart';
 
@@ -12,7 +12,7 @@ class Quiz extends StatefulWidget {
 class _QuizState extends State<Quiz> {
   Widget? activeScreen;
   final List<String> selectedAnswers = {};
-  void switchScreen() {
+  void chooseAnswer(String answer) {
     setState(() {
       activeScreen = QuestionsScreen();
     });
