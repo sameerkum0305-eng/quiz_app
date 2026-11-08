@@ -1,27 +1,42 @@
 
 import 'package:flutter/material.dart';
-import 'package:quiz_app/answer_button.dart';
-import 'package:quiz_app/data/questions.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'answer_button.dart';
+import 'data/questions.dart';
 
 class QuestionsScreen extends StatefulWidget {
+  const QuestionsScreen({
+    super.key,
+    required this.onSelectedAnswer,
+  });
+
+  final void Function(String answer) onSelectedAnswer;
+
   @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
+  State<QuestionsScreen> createState() {
     return _QuestionScreenState();
   }
 }
 
 class _QuestionScreenState extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
-  void answerQuestion(String selectedAnswers) {
+
+  void answerQuestion(String selectedAnswer) {
     widget.onSelectedAnswer(selectedAnswer);
+
     setState(() {
       currentQuestionIndex++;
     });
   }
+
   @override
-  Widget build(context) {
-    final currentQuestion = questions[0];
+  Widget build(BuildContext context) {
+    // Keep the last question available while Quiz changes to ResultsScreen.
+    final questionIndex = currentQuestionIndex < questions.length
+        ? currentQuestionIndex
+        : questions.length - 1;
+    final currentQuestion = questions[questionIndex];
 
     return Center(
       child: Container(
@@ -33,13 +48,20 @@ class _QuestionScreenState extends State<QuestionsScreen> {
           children: [
             Text(
               currentQuestion.text,
-              style: GoogleFonts.lato{}
-              style: TextStyle(color: Colors.white),
+              style: GoogleFonts.lato(
+                color: Colors.white,
+                fontSize: 20,
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 30),
-            ...currentQuestion.getShuffledAnswers().map((item) {
-              return AnswerButton(answerText: item, onTap: () {});
+            ...currentQuestion.getShuffledAnswers().map((answer) {
+              return AnswerButton(
+                answerText: answer,
+                onTap: () {
+                  answerQuestion(answer);
+                },
+              );
             }),
           ],
         ),
