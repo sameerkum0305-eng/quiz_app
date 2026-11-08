@@ -17,7 +17,7 @@ class ResultsScreen extends StatelessWidget{
             const Text('You answered X out of Y questions Correctly'),
             const SizedBox(height:30,),
             const Text('List of Answers and Questions'),
-            const SizedBox(height:30,),
+            const SizedBox(height:30),
             TextButton(
               onPressed: (){},
               child: const Text('Restart Quiz'),
